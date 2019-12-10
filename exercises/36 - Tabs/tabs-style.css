@@ -9,7 +9,7 @@
 }
 
 [role="tabpanel"] {
-  background: var(--yellow);
+  background: var(--pink);
   padding: 2rem;
 }
 
@@ -24,7 +24,7 @@ button {
 }
 
 button[aria-selected="true"] {
-  background: var(--yellow);
+  background: var(--pink);
   box-shadow: none;
   color: rgba(0,0,0,0.7);
 }
