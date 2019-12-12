@@ -16,7 +16,7 @@
 
     const buns = ['egg', 'wonder', 'brioche'];
 
-    const meats = {
+    let meats = {
       beyond: 10,
       beef: 5,
       pork: 7
@@ -57,54 +57,145 @@
     const myRange = createRange(3, 7);
 
     // Check if the last array you created is really an array with Array.isArray();
-    console.log(Array.isArray(myRange));
+    //console.log(Array.isArray(myRange));
 
     // Take the meats object and make three arrays with Object.entries(), Object.keys, Object.values()
     //The Object.entries() method returns an array of a given object's own enumerable string-keyed property [key, value] pairs, in the same order as that provided by a for...in loop
-    console.log(Object.entries(meats));
+    //console.log(Object.entries(meats));
     //The Object.keys() method returns an array of a given object's own enumerable property names, in the same order as we get with a normal loop.
-    console.log(Object.keys(meats));
+    //console.log(Object.keys(meats));
     //The Object.values() method returns an array of a given object's own enumerable property values, in the same order as that provided by a for...in loop (the difference being that a for-in loop enumerates properties in the prototype chain as well).
-    console.log(Object.values(meats));
+    //console.log(Object.values(meats));
 
     /*
     Instance Methods
   */
 
     // Display all bun types with " or " - use join()
+    //console.log(buns.join(" or "));
 
-    // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into a string
+    // We have a string "hot dogs,hamburgers,sausages,corn" - use split() to turn it into an array
+    let str = "hot dogs,hamburguers,sausages,corn";
+    let splitStr = str.split(" ,");
+    //console.log(splitStr);
 
     // take the last item off toppings with pop()
+    //console.log(toppings.pop());
+
     // add it back with push()
+
+    //console.log(toppings.push("Cheese"));
+
     // take the first item off toppings with shift()
+    //console.log(toppings.shift());
+
     // add it back in with unshift()
+
+    //console.log(toppings.unshift("Mushrooms"));
+
     // Do the last four,but immutable (with spreads and new variables)
+    let newToppings = toppings.slice(0, toppings.length - 1)
+    //console.log(newToppings);
 
+    let addToppings = [...newToppings, "Cheese"];
+    //another way 
+    // let addTopping = [...newToppings, toppings[toppings.length - 1]]
+    //console.log(addToppings);
 
+    let removeToppgins = toppings.slice(1)
+    //console.log(removeToppgins);
+
+    let AddagainTooping = ["Mushrooms", ...removeToppgins];
+    //another way addAgainTopping = [toppings.slice(1), ...removeToppings]
+    //console.log(AddagainTooping);
+    ////console.log("hola");
     // Make a copy of the toppings array with slice()
-    // Make a copy of the toppings array with a spread
-    // take out items 3 to 5 of your new toppings array with splice()
-    // find the index of Avocado with indexOf() / lastIndexOf()
-    // Check if hot sauce is in the toppings with includes()
-    // add it if it's not
-    // flip those toppings around with reverse()
 
+    let copyToppings = toppings.slice();
+    ////console.log(copyToppings);
+
+    // Make a copy of the toppings array with a spread
+
+    let copyToppingsSpr = [...toppings];
+    //console.log(copyToppingsSpr);
+
+    // take out items 3 to 5 of your new toppings array with splice()
+    let splTopping = copyToppings.splice(3, 5);
+    //console.log(copyToppings);
+
+    // find the index of Avocado with indexOf() / lastIndexOf()
+    //console.log(toppings.indexOf('Avocado'));
+    let toppingsStr = copyToppingsSpr.toString();
+    let strtoppingsStr = toppingsStr.lastIndexOf("Avocado");
+    //console.log(strtoppingsStr);
+
+    // Check if hot sauce is in the toppings with includes()
+    let incluToppings = copyToppingsSpr.includes("hot sauce");
+    //console.log(incluToppings);
+
+    // add it if it's not
+    addCopyToppings = [...copyToppingsSpr, "hot sauce"];
+    //console.log(addCopyToppings);
+
+    // flip those toppings around with reverse()
+    reverseCopyToppings = addCopyToppings.reverse();
+    //console.log(reverseCopyToppings);
     /*
       Callback Methods
     */
 
     // find the first rating that talks about a burger with find()
+    let bugerRating = feedback.find(rating => rating.comment.includes("burger"));
+    //console.log(bugerRating);
+
     // find all ratings that are above 2 with filter()
+
+    let ratingAbove = feedback.filter(rating => rating.rating > 2);
+    //console.log(ratingAbove);
+
     // find all ratings that talk about a burger with filter()
+    let commRating = feedback.filter(rating => rating.comment.toLowerCase().includes("burg"));
+    //console.log(commRating);
+
     // Remove the one star rating however you like!
+    let minRating = feedback.slice(0, feedback.length - 1);
+    //console.log(minRating);
+
+    let lucky = feedback.filter(function (shitRating) {
+      if (shitRating.rating <= 1) {
+        return true
+      }
+    })
+    //console.log(lucky);
 
     // check if there is at least 5 of one type of meat with some()
-    // make sure we have at least 3 of every meat with every()
-    // sort the toppings alphabetically with sort()
-    // sort the order totals from most expensive to least with .sort()
-    // Sort the prices with sort()
 
+    /* const meats = {
+      beyond: 10,
+      beef: 5,
+      pork: 7
+    };
+    */
+
+    //let arrMeats = Object.entries(meats);
+    let enoughMeat = Object.values(meats).some(meatValue => meatValue >= 5);
+    // console.log(enoughMeat);
+
+    // make sure we have at least 3 of every meat with every()
+    let meatQty = Object.values(meats).every(meatValue => meatValue >= 3);
+    //console.log(meatQty);
+
+    // sort the toppings alphabetically with sort()
+    let SorterTopping = toppings.sort();
+    //console.log(SorterTopping);
+
+    // sort the order totals from most expensive to least with .sort()
+    let sortedOrder = orderTotals.sort();
+    //console.log(sortedOrder);
+
+    // Sort the prices with sort()
+    let sortedPrices = Object.values(prices).sort();
+    console.log(sortedPrices);
     /*
       Looping Methods (next)
     */
