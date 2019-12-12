@@ -161,11 +161,7 @@
     let minRating = feedback.slice(0, feedback.length - 1);
     //console.log(minRating);
 
-    let lucky = feedback.filter(function (shitRating) {
-      if (shitRating.rating <= 1) {
-        return true
-      }
-    })
+    let lucky = feedback.filter((shitRating) => shitRating.rating <= 1)
     //console.log(lucky);
 
     // check if there is at least 5 of one type of meat with some()
