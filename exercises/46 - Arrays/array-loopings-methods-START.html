@@ -114,6 +114,61 @@
 
     const faces = ['😃', '🤠', '🤡', '🤑', '😵', '🌞', '🐶', '😺'];
 
+    function logTopping(topping, index, originalArray) {
+      const nextTopping = originalArray[index + 1];
+      const preTopping = originalArray[index - 1];
+      //log the topping
+      console.log(topping);
+      //log the prev topping if there is one 
+      preTopping ? console.log("pre: ", preTopping) : null;
+      // log the next topping if there is one 
+      nextTopping ? console.log("next: ", nextTopping) : null;
+      //if its the last item in the array  say goodbye 
+      index === originalArray.length - 1 ? console.log("GoodBye") : console.log("Getting the next topping");
+      //console.log("------❤❤❤❤❤------")
+    }
+
+    toppings.forEach(logTopping);
+
+    //map, filter and reduce 
+
+    console.clear();
+
+    function addArms(face) {
+      return `🤟${face}🤟`;
+    };
+    const toys = faces.map(addArms);
+
+    //console.log(toys);
+
+    function busify(name) {
+      return `${name} Bos`;
+    }
+    const fullNames = ["Wes", "Katie", "Poppy"].map(busify);
+    //console.log(fullNames);
+    const cleanPeople = people.map(function (person) {
+      // console.log(person);
+      const birthday = new Date(person.birthday);
+      // console.log(birthday);
+      // console.log(Date.prototype);
+    });
+
+    function findByProp(prop, proWeAreLooking) {
+      return function isStudent(student) {
+        return student[prop] === proWeAreLooking;
+      }
+    }
+
+    const student = students.find(findByProp("id", "565a"));
+    const student2 = students.find(findByProp("first_name", "Micki"));
+    //console.log(student, student2);
+    let total = orderTotals.reduce(sumNumber, 0);
+    //console.log(total);
+
+    function sumNumber(acc, currentTotal) {
+      return acc + currentTotal
+    }
+
     const inventory = [
       { type: 'shirt', price: 4000 },
       { type: 'pants', price: 4532 },
@@ -124,11 +179,26 @@
       { type: 'pants', price: 123 },
     ];
 
+    let totalInventory = inventory.reduce(countInventory, {});
+    // recordar que se inicializo con una callback que se encuentra abajo 
+    // e inicializamos el tercer parametro como objeto porque queremos un objeto con varios resultados. 
 
-    /*
-      Looping Methods
-    */
+    function countInventory(acc, currenValue) { // esta es la funcion callblack del reduce de arriba 
+      if (!acc[currenValue.type]) { // si, currente valye type no se encuentra en el objeto acumulador 
+        acc[currenValue.type] = 0; // igualarlo a 0, se termina el if 
+      }
+      acc[currenValue.type] += currenValue.price; // el acumulador currentvalue type es igual a la suma de el mismo y el currenvalue price que es el valor del precio
+      return acc; // recordar siempre retornar los reduce
+    }
+    // console.log(totalInventory)
 
+    //Si quiero el total 
+
+    //const inventoryCounts = inventory.reduce(invetoryReducer, {});
+    //console.log(inventoryCounts);
+
+    const totalIventoryPrice = inventory.reduce((acc, item) => acc + item.price, 0);
+    console.log(totalIventoryPrice);
   </script>
 </body>
 
