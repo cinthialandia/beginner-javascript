@@ -10,84 +10,92 @@
 
 <body>
   <script>
-    function makePizza(toppings = []) {
-      return new Promise(function (resolve, reject) {
-        // reject if people try with pineapple
-        if (toppings.includes('pineapple')) {
-          reject('Seriously? Get out 🍍');
+    function makePizza(toppings = []) { // this function recive a parameter  and we put a defoult array 
+      // return at first because the promise needs always to be returned wiht something
+      return new Promise(function (resolve, reject) { // to make any promise, a function must be made, with a callback that accepts a resolved and rejected parameter
+        //Reject if people try with pineapple 
+        if (toppings.includes("pineapple")) {
+          reject("seriusly?? Gey out 🍍")
         }
         const amountOfTimeToBake = 500 + (toppings.length * 200);
-        // wait 1 second for the pizza to cook:
+        // wait 1 second for the pizza to cook 
         setTimeout(function () {
-          // when you are ready, you can resolve this promise
-          resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
+          // when something are ready you can resolve this promise 
+          resolve(`here is your pizza 🍕 with the toppings ${toppings.join("")}`); // resolve part 
         }, amountOfTimeToBake);
-        // if something went wrong, we can reject this promise;
+
+        // if something went wrong, we can reject this promise
       });
     }
 
-    // console.log('First');
-    makePizza(['pepperoni'])
-      .then(function (pizza) {
-        console.log(pizza);
-        return makePizza(['ham', 'cheese']);
-      })
-      .then(function (pizza) {
-        console.log(pizza);
-        return makePizza(['hot peppers', 'onion', 'feta']);
-      })
-      .then(function (pizza) {
-        console.log(pizza);
-        return makePizza(['pineapple']);
-      })
-      .then(function (pizza) {
-        console.log(pizza);
-        return makePizza(['one', 'two', 'three', 'four', 'one', 'two', 'three', 'four', 'one', 'two', 'three', 'four']);
-      }).then(pizza => {
-        console.log('All done! here is your last pizza');
-        console.log(pizza);
-      })
-      .catch(handleError)
+    // In this example, we are chaining the promises, so that they are realized, one after the other, that is, when it is finished, the following begins.
+    makePizza(["pepperoni", "hello"]).then(function (pizza) { // we can call the function and send inmeditaly the argument.
+      //if we want to know the value of the promises, we need to used the "then" keyboard with an a callback an any argument.
+      console.log(pizza);
+      return makePizza(['ham', 'cheese']); // we return the value of the function, within the main function, which would be the one that would be chained to the first, and then we will then put it to obtain the value of that promise, and we do the same with the following
+    }).then(function (pizza) {
+      console.log(pizza);
+      return makePizza(["hot pepper", "onions", "feta"]);
+    }).then(function (pizza) {
+      console.log(pizza);
+      return makePizza(["pineapple"]);
+    }).then(function (pizza) {
+      console.log(pizza);
+      return makePizza(["one", "two", "three", "four", "five", "one", "two", "three", "four", "five"])
+    }).then(pizza => {
+      console.log("All done! here ir your last pizza");
+      console.log(pizza);
+    }).catch(handleError)
 
-    // console.log('Right after');
 
-    // Run them Concurrently
-    // const pizzaPromise1 = makePizza(['hot peppers', 'onion', 'feta']);
-    // const pizzaPromise2 = makePizza(['one', 'two', 'three', 'four', 'one', 'two', 'three', 'four', 'one', 'two', 'three', 'four']);
-    // const pizzaPromise3 = makePizza(['ham', 'cheese']);
+    //REVISAR PORQUE CONO NO SE SEPARA
 
-    // const dinnerPromise = Promise.all([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
 
-    // dinnerPromise.then(function ([hottie, garbagePail, hamAndCheese]) {
-    //   console.log(hottie, garbagePail, hamAndCheese);
-    // });
-
-    // const firstPizzaPromise = Promise.race([pizzaPromise1, pizzaPromise2, pizzaPromise3]);
-
-    // firstPizzaPromise.then(pizza => {
-    //   console.log('You must be hungry, here is the first one ready');
-    //   console.log(pizza);
-    // })
-
+    /*
+        // run them concurrently
+        //If you want all promises to be resolved at the same time you can use the word "all".
+        //we make a function expression
+        const pizzaPromese1 = makePizza(["hot pepper", "onions", "feta"]);
+        const pizzaPromese2 = makePizza(["one", "two", "three", "four", "five", "one", "two", "three", "four", "five"]);
+        const pizzaPromese3 = makePizza(["ham", "cheese"]);
+        //and in a variable we save all the fuctions expressiones with the word all to get all at the same time
+        const dinnerPromise = Promise.all([pizzaPromese1, pizzaPromese2, pizzaPromese3]);
+        //and then we get the value, we can use to array functiosn
+        // we substitute the arguments, with the names of the parameters, and thus have the name as variable
+        //IGUAL PREGUNTAR ESTO
+        dinnerPromise.then(function ([onePizza, twoPizza, threePizza]) {
+          console.log(onePizza, twoPizza, threePizza);
+        });
+    
+        // If, I want to have a promise fulfilled first, use the word race
+    
+        const firsPizzaPromise = Promise.race([pizzaPromese1, pizzaPromese2, pizzaPromese3]);
+    
+        firsPizzaPromise.then(pizza => {
+          console.log("You must be hungry");
+          console.log(pizza);
+        })
+    */
+    // and we can pass that function with that logic as a callback, to the function of cacth
     function handleError(err) {
-      console.log('Ohh noooo!!');
+      console.log("oh no!!");
       console.log(err);
     }
 
-    makePizza(['cheese', 'pineapple'])
-      .then(pizza => {
-        console.log(pizza);
-      }).catch(handleError)
+    //with the word catch, we grab the error of the broken or rejected promise and show or do within it what we want it to show as value
+    makePizza(["pineapple"]).then(pizza => {
+      console.log(pizza);
+    }).catch(handleError);
 
-
-    const p1 = makePizza(['pep']);
-    const p2 = makePizza(['pineapple']);
+    const p1 = makePizza(["pep"]);
+    const p2 = makePizza(["pineapple"]);
 
     const dinnerPromise2 = Promise.allSettled([p1, p2]);
 
     dinnerPromise2.then(results => {
-      console.log(results);
-    })
+      consle.log(results)
+    });
+
   </script>
 </body>
 

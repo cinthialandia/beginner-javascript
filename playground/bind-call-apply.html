@@ -9,21 +9,26 @@
 </head>
 
 <body>
-  <p>Hey</p>
+
   <button>Click me</button>
-  <div class="wrapper">
-    <p>Hey im in a wrapper</p>
-  </div>
+
   <script>
-    const person = {
-      name: 'Wes Bos',
-      sayHi() {
-        console.log(this);
-        console.log(`hey ${this.name}`);
-        return `hey ${this.name}`;
+    const cinthia = {
+      name: 'Cinthia',
+      sayHi: function (salute = 'hey, this.name is') {
+        console.log(`${salute} ${this.name}`);
       }
     };
 
+    const gerardo = {
+      name: 'Gerardo',
+      sayHi: function (salute = 'hey, this.name is') {
+        console.log(`${salute} ${this.name}`);
+      }
+    };
+
+
+    /*
     const jenna = { name: 'Jenna' };
 
     const sayHi = person.sayHi.bind({ name: 'Harry' });
@@ -64,7 +69,7 @@
     console.log(myMeal);
     const myMeal2 = bill.describe.apply(bill, ['pizza', 'beer', 0.13]);
     console.log(myMeal2);
-
+*/
   </script>
 </body>
 

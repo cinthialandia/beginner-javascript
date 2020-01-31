@@ -10,73 +10,87 @@
 
 <body>
   <script>
+    //To use it, the function performed is equal to the promise in general.
     function wait(ms = 0) {
       return new Promise((resolve) => {
         setTimeout(resolve, ms);
       })
     }
 
-    function makePizza(toppings = []) {
-      return new Promise(function (resolve, reject) {
-        // reject if people try with pineapple
-        if (toppings.includes('pineapple')) {
-          reject('Seriously? Get out 🍍');
+//function pizza 
+
+function makePizza(toppings = []) { // this function recive a parameter  and we put a defoult array 
+      // return at first because the promise needs always to be returned wiht something
+      return new Promise(function (resolve, reject) { // to make any promise, a function must be made, with a callback that accepts a resolved and rejected parameter
+        //Reject if people try with pineapple 
+        if (toppings.includes("pineapple")) {
+          reject("seriusly?? Gey out 🍍")
         }
         const amountOfTimeToBake = 500 + (toppings.length * 200);
-        // wait 1 second for the pizza to cook:
+        // wait 1 second for the pizza to cook 
         setTimeout(function () {
-          // when you are ready, you can resolve this promise
-          resolve(`Here is your pizza 🍕 with the toppings ${toppings.join(' ')}`);
+          // when something are ready you can resolve this promise 
+          resolve(`here is your pizza 🍕 with the toppings ${toppings.join("")}`); // resolve part 
         }, amountOfTimeToBake);
-        // if something went wrong, we can reject this promise;
+
+        // if something went wrong, we can reject this promise
       });
     }
 
+    //every function that has an await within it, must carry the word asyn so that it can be executed.async function go() {
     async function go() {
-      console.log('Starting');
-      await wait(2000);
-      console.log('running');
+      console.log("starting");
+      await wait(2000); // This promise works, putting the word await in front of any promise, and the asynchronous function will return
+      console.log("running");
       await wait(200);
-      console.log('ending');
+      console.log("ending")
     }
 
-    // go();
+    //go();
 
-    async function makeDinner() {
-      const pizzaPromise1 = makePizza(['pepperoni']);
-      const pizzaPromise2 = makePizza(['mushrooms']);
-      const [pep, mush] = await Promise.all([pizzaPromise1, pizzaPromise2]);
-      console.log(pep, mush);
-    }
+async function makeDinner() {
+  const pizza1 = await makePizza(["pepperoni"]);
+  console.log(pizza1);
+  const pizza2 = await makePizza(["margarita"]);
+  console.log(pizza2);
+}
 
-    makeDinner();
+makeDinner()
 
-    // // Function declaration
-    // async function fd() { }
 
-    // // arrow function
-    // const arrowFn = async () => { }
 
-    // // call back
-    // window.addEventListener('click', async function () {
 
-    // })
+/*
+        //types of function
+    
+        // function declaration
+        async function fd() { }
+    
+        // arrow function
+        const arrowFn = async () => { }
+    
+        // call back
+        window.addEventListener("click", async function () { })
+    
+        //
+        const person = {
+          //method
+          sayHi = async function () {
+    
+          },
+          // method shorthand
+          async sayHello() {
+    
+          },
+          //function property
+          sayHey: async () => {
+    
+          }
+        }
+        */
+    //
 
-    // //
-    // const person = {
-    //   // method
-    //   sayHi: async function () {
 
-    //   },
-    //   // method shorthand
-    //   async sayHello() {
-
-    //   },
-    //   // function property
-    //   sayHey: async () => {
-
-    //   }
-    // }
   </script>
 </body>
 
