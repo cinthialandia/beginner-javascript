@@ -1,10 +1,5 @@
-const last = 'bos';
-const middle = 'slam dunk';
-
-export function returnHi(name) {
-  return `hi ${name} ${last}`;
+export function sayHi(name) {
+  return `Hi ${name}`;
 }
-const first = 'wes';
-// NAMED exports - we can have as many as we want
-export { last, middle };
-export default first;
+
+export const age = 23;
